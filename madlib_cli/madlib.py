@@ -17,6 +17,8 @@ to quit write quit.
 //////////////////////////////////////////////////////////////////////////////////'''
     print(commands)
 
+def end_game():
+    print("thank you for playing madlib")
 
 def user_input(txt_tuple):
     user_list = [input("enter an {} : ".format(element)) for element in txt_tuple]
@@ -30,7 +32,8 @@ def read_template(path):
         return err
 
 def parse_template(txt):
-    txt_list =re.findall(r"\{\w+\}",txt)
+    txt_list =re.findall(r"\{\w+[ (\d\-\d|\w'\w*)]*\}",txt)
+    print(txt_list)
     txt_tuples = tuple([x[1:len(x)-1] for x in txt_list])
     new_txt = txt
     for element in txt_tuples:
@@ -42,7 +45,7 @@ def merge(txt,user_tuples):
 
 def main():
     welcome_message()
-    file_data = read_template("assets/sample.txt")
+    file_data = read_template("assets/dark_and_stormy_night_template.txt")
     new_txt_str, txt_tuple = parse_template(file_data)
     game_commands()
     while input(">") != "quit":
@@ -51,8 +54,9 @@ def main():
         print('''
 your new sentences:
 {}
-        '''.format(new_sentence))
+'''.format(new_sentence))
         game_commands()
+    end_game()
 
 if __name__ == "__main__":
     main()
