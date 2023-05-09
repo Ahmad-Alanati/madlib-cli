@@ -20,6 +20,14 @@ to quit write quit.
 def end_game():
     print("thank you for playing madlib")
 
+def save_user_sentence(new_sentence):
+    try:
+        with open("assets/user_sentence.txt",'w') as file:
+            file.writelines(new_sentence)
+            return "saved"
+    except KeyError as err:
+        return err
+
 def user_input(txt_tuple):
     user_list = [input("enter an {} : ".format(element)) for element in txt_tuple]
     return user_list
@@ -33,7 +41,6 @@ def read_template(path):
 
 def parse_template(txt):
     txt_list =re.findall(r"\{\w+[ (\d\-\d|\w'\w*)]*\}",txt)
-    print(txt_list)
     txt_tuples = tuple([x[1:len(x)-1] for x in txt_list])
     new_txt = txt
     for element in txt_tuples:
@@ -51,11 +58,7 @@ def main():
     while input(">") != "quit":
         user_data = user_input(txt_tuple)
         new_sentence = merge(new_txt_str,user_data)
-        print('''
-your new sentences:
-{}
-'''.format(new_sentence))
-        game_commands()
+        save_user_sentence(new_sentence)
     end_game()
 
 if __name__ == "__main__":
