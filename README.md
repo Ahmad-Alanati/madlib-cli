@@ -10,7 +10,7 @@
 
 ## How to initialize/run your application (where applicable)
 
-python ./madlib_cli/madlib_cli.py
+python ./madlib_cli/madlib.py
 
 ## How to use your library (where applicable)
 Tests
