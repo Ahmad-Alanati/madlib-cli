@@ -50,6 +50,12 @@ def parse_template(txt):
 def merge(txt,user_tuples):
     return txt.format(*user_tuples)
 
+def print_user_sentence(new_sentence):
+    print('''
+your new sentences:
+{}
+'''.format(new_sentence))
+
 def main():
     welcome_message()
     file_data = read_template("assets/dark_and_stormy_night_template.txt")
@@ -58,6 +64,7 @@ def main():
     while input(">") != "quit":
         user_data = user_input(txt_tuple)
         new_sentence = merge(new_txt_str,user_data)
+        print_user_sentence(new_sentence)
         save_user_sentence(new_sentence)
     end_game()
 
